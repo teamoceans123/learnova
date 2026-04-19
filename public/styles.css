@@ -1,0 +1,253 @@
+:root {
+  --bg: #0f0920;
+  --bg-card: rgba(255, 255, 255, 0.08);
+  --text: #f5f3ff;
+  --muted: #cbc5e1;
+  --primary: #8b5cf6;
+  --primary-2: #a78bfa;
+  --danger: #ef4444;
+  --success: #10b981;
+  --radius: 16px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text);
+  background: linear-gradient(145deg, #13072e, #2a1b58, #1b103c);
+}
+
+.container {
+  width: min(1100px, 92vw);
+  margin: 2.5rem auto;
+  position: relative;
+  z-index: 2;
+}
+
+.bg-glow {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.bg-glow-1 {
+  width: 300px;
+  height: 300px;
+  top: -80px;
+  left: -60px;
+  background: #a78bfa;
+}
+
+.bg-glow-2 {
+  width: 320px;
+  height: 320px;
+  right: -100px;
+  bottom: -90px;
+  background: #7c3aed;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0 0 0.8rem;
+}
+
+.card {
+  backdrop-filter: blur(12px);
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius);
+  padding: 1rem;
+  margin: 0.8rem 0;
+  animation: fadeIn 0.25s ease-out;
+}
+
+.auth-grid,
+.grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.auth-grid {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.grid {
+  grid-template-columns: 1fr 1fr;
+}
+
+.form {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.grid-2 {
+  grid-template-columns: 1fr 1fr;
+}
+
+.grid-2 .full {
+  grid-column: 1 / -1;
+}
+
+input,
+select,
+button {
+  border: 0;
+  border-radius: 12px;
+  padding: 0.7rem 0.8rem;
+  font-size: 0.95rem;
+}
+
+input,
+select {
+  background: rgba(255, 255, 255, 0.92);
+  color: #1f1736;
+}
+
+button {
+  cursor: pointer;
+  background: linear-gradient(90deg, var(--primary), var(--primary-2));
+  color: #fff;
+  font-weight: 600;
+  transition: transform 0.16s ease, opacity 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.ghost {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.danger {
+  background: linear-gradient(90deg, #b91c1c, var(--danger));
+}
+
+.action-bar,
+.action-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.course-list {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.course-item {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 14px;
+  padding: 0.8rem;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.course-item:hover {
+  transform: translateY(-2px);
+  border-color: rgba(167, 139, 250, 0.8);
+}
+
+.course-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  color: var(--muted);
+  font-size: 0.88rem;
+  margin-top: 0.4rem;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.empty-state {
+  color: #ddd6fe;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px dashed rgba(255, 255, 255, 0.25);
+  border-radius: 12px;
+  padding: 0.75rem;
+}
+
+.user-info {
+  font-size: 0.92rem;
+  color: #ddd6fe;
+}
+
+.toast-container {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 2000;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.toast {
+  padding: 0.7rem 0.9rem;
+  border-radius: 10px;
+  color: white;
+  animation: slideIn 0.22s ease;
+}
+
+.toast.success {
+  background: linear-gradient(120deg, #047857, var(--success));
+}
+
+.toast.error {
+  background: linear-gradient(120deg, #991b1b, var(--danger));
+}
+
+.hidden {
+  display: none !important;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 860px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

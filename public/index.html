@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Course Selection & Enrollment</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    <main class="container">
+      <header class="header">
+        <h1>Course Enrollment System</h1>
+        <div id="userInfo" class="user-info hidden"></div>
+      </header>
+
+      <section id="authSection" class="card auth-grid">
+        <div>
+          <h2>Login</h2>
+          <form id="loginForm" class="form">
+            <input type="email" name="email" placeholder="Email" required />
+            <input type="password" name="password" placeholder="Password" required minlength="8" />
+            <button type="submit">Login</button>
+          </form>
+        </div>
+
+        <div>
+          <h2>Register</h2>
+          <form id="registerForm" class="form">
+            <input type="text" name="name" placeholder="Name" required minlength="2" />
+            <input type="email" name="email" placeholder="Email" required />
+            <input type="password" name="password" placeholder="Password (min 8 chars)" required minlength="8" />
+            <select name="role" required>
+              <option value="STUDENT">Student</option>
+              <option value="ADMIN">Admin</option>
+            </select>
+            <button type="submit">Create Account</button>
+          </form>
+        </div>
+      </section>
+
+      <section id="dashboardSection" class="hidden">
+        <div class="card action-bar">
+          <h2>Dashboard</h2>
+          <div class="action-buttons">
+            <button id="refreshBtn" class="ghost">Refresh</button>
+            <button id="logoutBtn" class="danger">Logout</button>
+          </div>
+        </div>
+
+        <div id="adminCourseFormCard" class="card hidden">
+          <h3 id="courseFormTitle">Create Course</h3>
+          <form id="courseForm" class="form grid-2">
+            <input type="hidden" id="courseId" />
+            <input type="text" name="title" placeholder="Course title" required minlength="2" />
+            <input type="text" name="instructor" placeholder="Instructor" required minlength="2" />
+            <input class="full" type="text" name="description" placeholder="Description (min 10 chars)" required minlength="10" />
+            <input type="number" name="capacity" placeholder="Capacity" required min="1" />
+            <div class="full action-buttons">
+              <button type="submit">Save Course</button>
+              <button type="button" id="cancelEditBtn" class="ghost hidden">Cancel Edit</button>
+            </div>
+          </form>
+        </div>
+
+        <section class="grid">
+          <div class="card">
+            <h3>Available Courses</h3>
+            <div id="coursesLoading" class="muted">Loading courses...</div>
+            <div id="courseList" class="course-list"></div>
+            <div id="courseEmpty" class="empty-state hidden">No courses available yet.</div>
+          </div>
+
+          <div class="card">
+            <h3>My Courses</h3>
+            <div id="myCoursesLoading" class="muted">Loading enrolled courses...</div>
+            <div id="myCourseList" class="course-list"></div>
+            <div id="myCourseEmpty" class="empty-state hidden">You are not enrolled in any course yet.</div>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <div id="toastContainer" class="toast-container"></div>
+    <script src="./app.js"></script>
+  </body>
+</html>
