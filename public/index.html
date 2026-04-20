@@ -4,81 +4,155 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Course Selection & Enrollment</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
     <div class="bg-glow bg-glow-1"></div>
     <div class="bg-glow bg-glow-2"></div>
+    <div class="bg-glow bg-glow-3"></div>
+
     <main class="container">
-      <header class="header">
-        <h1>Course Enrollment System</h1>
-        <div id="userInfo" class="user-info hidden"></div>
-      </header>
-
-      <section id="authSection" class="card auth-grid">
-        <div>
-          <h2>Login</h2>
-          <form id="loginForm" class="form">
-            <input type="email" name="email" placeholder="Email" required />
-            <input type="password" name="password" placeholder="Password" required minlength="8" />
-            <button type="submit">Login</button>
-          </form>
-        </div>
-
-        <div>
-          <h2>Register</h2>
-          <form id="registerForm" class="form">
-            <input type="text" name="name" placeholder="Name" required minlength="2" />
-            <input type="email" name="email" placeholder="Email" required />
-            <input type="password" name="password" placeholder="Password (min 8 chars)" required minlength="8" />
-            <select name="role" required>
-              <option value="STUDENT">Student</option>
-              <option value="ADMIN">Admin</option>
-            </select>
-            <button type="submit">Create Account</button>
-          </form>
-        </div>
+      <section id="landingSection" class="view view-active">
+        <article class="card hero-card">
+          <span class="tagline">Modern Enrollment Experience</span>
+          <h1>Course Selection & Enrollment System</h1>
+          <p class="muted">
+            Browse courses, manage enrollments, and track your learning journey with a clean and simple
+            interface.
+          </p>
+          <div class="hero-actions">
+            <button id="goLoginBtn" type="button">Login</button>
+            <button id="goRegisterBtn" type="button" class="btn-soft">Register</button>
+          </div>
+        </article>
       </section>
 
-      <section id="dashboardSection" class="hidden">
-        <div class="card action-bar">
-          <h2>Dashboard</h2>
-          <div class="action-buttons">
-            <button id="refreshBtn" class="ghost">Refresh</button>
-            <button id="logoutBtn" class="danger">Logout</button>
+      <section id="authSection" class="view auth-view hidden">
+        <article class="card auth-card">
+          <div class="auth-head">
+            <h2 id="authTitle">Welcome back</h2>
+            <button id="backHomeBtn" class="btn-link" type="button">Back to Home</button>
           </div>
-        </div>
 
-        <div id="adminCourseFormCard" class="card hidden">
+          <div class="auth-toggle">
+            <button id="showLoginBtn" class="tab-btn active" type="button">Login</button>
+            <button id="showRegisterBtn" class="tab-btn" type="button">Register</button>
+          </div>
+
+          <form id="loginForm" class="form auth-form">
+            <label class="field">
+              <span>Email</span>
+              <input type="email" name="email" placeholder="you@example.com" required />
+            </label>
+            <label class="field">
+              <span>Password</span>
+              <input type="password" name="password" placeholder="••••••••" required minlength="8" />
+            </label>
+            <p class="form-feedback hidden" data-feedback-for="loginForm"></p>
+            <button type="submit">Login</button>
+          </form>
+
+          <form id="registerForm" class="form auth-form hidden">
+            <label class="field">
+              <span>Name</span>
+              <input type="text" name="name" placeholder="Your full name" required minlength="2" />
+            </label>
+            <label class="field">
+              <span>Email</span>
+              <input type="email" name="email" placeholder="you@example.com" required />
+            </label>
+            <label class="field">
+              <span>Password</span>
+              <input type="password" name="password" placeholder="Minimum 8 characters" required minlength="8" />
+            </label>
+            <label class="field">
+              <span>Role</span>
+              <select name="role" required>
+                <option value="STUDENT">Student</option>
+                <option value="ADMIN">Admin</option>
+              </select>
+            </label>
+            <p class="form-feedback hidden" data-feedback-for="registerForm"></p>
+            <button type="submit">Create Account</button>
+          </form>
+        </article>
+      </section>
+
+      <section id="dashboardSection" class="view hidden">
+        <header class="card top-nav">
+          <div class="brand">
+            <h3>Learnova</h3>
+            <p id="userInfo" class="user-info"></p>
+          </div>
+          <nav class="nav-list">
+            <button class="tab-btn active" data-nav="dashboard" type="button">Dashboard</button>
+            <button class="tab-btn" data-nav="courses" type="button">Courses</button>
+            <button class="tab-btn" data-nav="my-courses" type="button">My Courses</button>
+          </nav>
+          <div class="nav-actions">
+            <button id="refreshBtn" class="btn-soft" type="button">Refresh</button>
+            <button id="logoutBtn" class="btn-danger" type="button">Logout</button>
+          </div>
+        </header>
+
+        <article id="welcomePanel" class="card panel view-active">
+          <h2 id="welcomeTitle">Welcome</h2>
+          <p class="muted">Use the navigation above to explore courses and manage your enrollment in seconds.</p>
+        </article>
+
+        <article id="adminCourseFormCard" class="card panel hidden">
           <h3 id="courseFormTitle">Create Course</h3>
           <form id="courseForm" class="form grid-2">
             <input type="hidden" id="courseId" />
-            <input type="text" name="title" placeholder="Course title" required minlength="2" />
-            <input type="text" name="instructor" placeholder="Instructor" required minlength="2" />
-            <input class="full" type="text" name="description" placeholder="Description (min 10 chars)" required minlength="10" />
-            <input type="number" name="capacity" placeholder="Capacity" required min="1" />
+            <label class="field">
+              <span>Course title</span>
+              <input type="text" name="title" placeholder="Intro to Database Systems" required minlength="2" />
+            </label>
+            <label class="field">
+              <span>Instructor</span>
+              <input type="text" name="instructor" placeholder="Prof. Williams" required minlength="2" />
+            </label>
+            <label class="field full">
+              <span>Description</span>
+              <input type="text" name="description" placeholder="Add a brief summary..." required minlength="10" />
+            </label>
+            <label class="field">
+              <span>Capacity</span>
+              <input type="number" name="capacity" placeholder="50" required min="1" />
+            </label>
+            <p class="form-feedback hidden full" data-feedback-for="courseForm"></p>
             <div class="full action-buttons">
               <button type="submit">Save Course</button>
-              <button type="button" id="cancelEditBtn" class="ghost hidden">Cancel Edit</button>
+              <button type="button" id="cancelEditBtn" class="btn-soft hidden">Cancel Edit</button>
             </div>
           </form>
-        </div>
+        </article>
 
-        <section class="grid">
-          <div class="card">
-            <h3>Available Courses</h3>
-            <div id="coursesLoading" class="muted">Loading courses...</div>
-            <div id="courseList" class="course-list"></div>
-            <div id="courseEmpty" class="empty-state hidden">No courses available yet.</div>
+        <article id="coursesPanel" class="card panel hidden">
+          <div class="section-head">
+            <h3>Course Catalog</h3>
+            <p class="muted">Available courses for enrollment.</p>
           </div>
+          <div id="coursesLoading" class="loading-grid hidden" aria-live="polite"></div>
+          <div id="courseList" class="course-grid"></div>
+          <div id="courseEmpty" class="empty-state hidden">No courses available right now.</div>
+        </article>
 
-          <div class="card">
+        <article id="myCoursesPanel" class="card panel hidden">
+          <div class="section-head">
             <h3>My Courses</h3>
-            <div id="myCoursesLoading" class="muted">Loading enrolled courses...</div>
-            <div id="myCourseList" class="course-list"></div>
-            <div id="myCourseEmpty" class="empty-state hidden">You are not enrolled in any course yet.</div>
+            <p class="muted">Courses currently enrolled by you.</p>
           </div>
-        </section>
+          <div id="myCoursesLoading" class="loading-grid hidden" aria-live="polite"></div>
+          <div id="myCourseList" class="course-grid"></div>
+          <div id="myCourseEmpty" class="empty-state hidden">You have not enrolled in any course yet.</div>
+        </article>
       </section>
     </main>
 
